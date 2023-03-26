@@ -9,6 +9,8 @@ target 'Orion' do
 pod 'SSZipArchive'
 pod 'Alamofire'
 pod 'SwiftyXMLParser'
+pod 'SwiftyJSON'
+pod 'SSZipArchive'
 
   target 'OrionTests' do
     inherit! :search_paths
