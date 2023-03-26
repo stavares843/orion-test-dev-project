@@ -14,14 +14,14 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             return
         }
         
-        guard let extensionURLString = message.body as? String,
-              let extensionURL = URL(string: extensionURLString) else {
-            print("Error: Invalid extension URL")
+        guard let fileURL = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first?.appendingPathComponent("addon-1865-latest.xpi") else {
+            print("Error: Cannot find extension file in bundle")
             return
         }
-        
-        installExtension(from: extensionURL)
+
+        installExtension(from: fileURL)
     }
+
 
     struct Manifest: Codable {
            let name: String
@@ -128,7 +128,82 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             webView.bottomAnchor.constraint(equalTo: toolbar.topAnchor)
         ])
     }
-        
+    
+    @objc private func installExtension(from fileURL: URL) {
+        let fileManager = FileManager.default
+        let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
+        let destFilePath = extensionsDirURL.appendingPathComponent(fileURL.lastPathComponent)
+
+        do {
+            try fileManager.moveItem(at: fileURL, to: destFilePath)
+            print("Installed extension to: \(destFilePath)")
+            DispatchQueue.main.async {
+                let outputController = ExtensionOutputController(extensionFileURL: destFilePath)
+                self.navigationController?.pushViewController(outputController, animated: true)
+            }
+        } catch {
+            print("Error installing extension: \(error.localizedDescription)")
+        }
+    }
+
+    
+    /*
+    @objc private func installExtension(from fileURL: URL) {
+        let task = URLSession.shared.downloadTask(with: fileURL) { (url, response, error) in
+            guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
+                    print("Error: Invalid extension URL")
+                    return
+                }
+            print("Downloaded file to: \(fileURL)")
+            
+            let fileManager = FileManager.default
+            let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
+            let destFilePath = extensionsDirURL.appendingPathComponent(fileURL.lastPathComponent)
+            
+            do {
+                try fileManager.moveItem(at: fileURL, to: destFilePath)
+                print("Installed extension to: \(destFilePath)")
+                DispatchQueue.main.async {
+                    let outputController = ExtensionOutputController()
+                    self.navigationController?.pushViewController(outputController, animated: true)
+                }
+            } catch {
+                print("Error installing extension: \(error.localizedDescription)")
+            }
+        }
+        task.resume()
+    }*/
+
+    func downloadExtension(extensionURL: URL) {
+        let task = URLSession.shared.downloadTask(with: extensionURL) { localURL, urlResponse, error in
+            guard let localURL = localURL else {
+                print("Error downloading extension: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            do {
+                let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                let destinationURL = documentsURL.appendingPathComponent(extensionURL.lastPathComponent)
+                
+                try FileManager.default.moveItem(at: localURL, to: destinationURL)
+                
+                DispatchQueue.main.async {
+                    self.installExtension(from: destinationURL)
+                }
+            } catch {
+                print("Error moving downloaded file: \(error)")
+            }
+        }
+        task.resume()
+    }
+
+
+    @objc private func showExtensionOutput() {
+        // TODO: Implement the code to show the extension output in a new tab
+        print("Showing extension output")
+    }
+
+        /*
         @objc private func installExtension(from fileURL: URL) {
             let task = URLSession.shared.downloadTask(with: fileURL) { (url, response, error) in
                 if let error = error {
@@ -164,7 +239,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             }
             
             task.resume()
-        }
+        }*/
 
     @objc private func newTab() {
         // Create a new tab
