@@ -77,24 +77,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
                     self.webView.configuration.userContentController.add(self, name: "installExtension")
                 }
             }
-
-            /*let javascript = """
-                document.querySelector('.Button--action').addEventListener('click', function() {
-                    webkit.messageHandlers.installExtension.postMessage("");
-                });
-                document.querySelector('.Button--action').textContent = '+ Add to Orion';
-            """
-            self.webView.evaluateJavaScript(javascript) { (_, error) in
-                if let error = error {
-                    print("Error evaluating JavaScript: \(error.localizedDescription)")
-                } else {
-                    print("JavaScript executed successfully")
-                    
-                    // Add code to download and install the extension when the button is tapped
-                   
-                }
-            }*/
-
         }
         
         //Create the URL bar
@@ -146,31 +128,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             webView.bottomAnchor.constraint(equalTo: toolbar.topAnchor)
         ])
     }
-}
-    extension BrowserViewController {
-        func downloadAndExtractPackage(url: URL) {
-            let downloadTask = URLSession.shared.downloadTask(with: url) { location, _, error in
-                guard let location = location else {
-                    print("Failed to download package: \(error?.localizedDescription ?? "Unknown error")")
-                    return
-                }
-                let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-                let destinationUrl = documentsUrl.appendingPathComponent("package.zip")
-
-                do {
-                    try FileManager.default.moveItem(at: location, to: destinationUrl)
-                    try SSZipArchive.unzipFile(atPath: destinationUrl.path, toDestination: documentsUrl.path)
-                    let manifestUrl = documentsUrl.appendingPathComponent("manifest.json")
-                    let manifestData = try Data(contentsOf: manifestUrl)
-                    let decoder = JSONDecoder()
-                    let manifest = try decoder.decode(Manifest.self, from: manifestData)
-                    // Do something with the manifest data here
-                } catch {
-                    print("Failed to extract package: \(error.localizedDescription)")
-                }
-            }
-            downloadTask.resume()
-        }
         
         @objc private func installExtension(from fileURL: URL) {
             let task = URLSession.shared.downloadTask(with: fileURL) { (url, response, error) in
@@ -209,98 +166,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             task.resume()
         }
 
-        /*
-        // WORKS
-        @objc private func installExtension(from fileURL: URL) {
-            guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
-                print("Error: Invalid extension URL")
-                return
-            }
-            let task = URLSession.shared.downloadTask(with: extensionURL) { (url, response, error) in
-                guard let downloadedFileURL = url, error == nil else {
-                    print("Error downloading file: \(error!.localizedDescription)")
-                    return
-                }
-                
-                print("Downloaded file to: \(downloadedFileURL)")
-                
-                let fileManager = FileManager.default
-                let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
-                let destFilePath = extensionsDirURL.appendingPathComponent(extensionURL.lastPathComponent)
-                
-                do {
-                    try fileManager.moveItem(at: downloadedFileURL, to: destFilePath)
-                    print("Installed extension to: \(destFilePath)")
-                } catch {
-                    print("Error installing extension: \(error.localizedDescription)")
-                }
-            }
-            task.resume()
-        }
-*/
-        
-      /*  @objc private func installExtension(fileURL: URL) {
-            guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
-                print("Error: Invalid extension URL")
-                return
-            }
-            
-            let task = URLSession.shared.downloadTask(with: extensionURL) { (url, response, error) in
-                guard let fileURL = url, error == nil else {
-                    print("Error downloading file: \(error!.localizedDescription)")
-                    return
-                }
-                
-                print("Downloaded file to: \(fileURL)")
-                
-                let fileManager = FileManager.default
-                let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
-                let destFilePath = extensionsDirURL.appendingPathComponent(extensionURL.lastPathComponent)
-                
-                do {
-                    try fileManager.moveItem(at: fileURL, to: destFilePath)
-                    print("Installed extension to: \(destFilePath)")
-                } catch {
-                    print("Error installing extension: \(error.localizedDescription)")
-                }
-            }
-            task.resume()
-        } */
-
-        
-       /* @objc private func installExtension(fileURL: URL) {
-            guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
-                print("Error: Invalid extension URL")
-                return
-            }
-            
-            let task = URLSession.shared.downloadTask(with: extensionURL) { (url, response, error) in
-                guard let fileURL = url, error == nil else {
-                    print("Error downloading file: \(error!.localizedDescription)")
-                    return
-                }
-                
-                print("Downloaded file to: \(fileURL)")
-                
-                let fileManager = FileManager.default
-                let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
-                let destFilePath = extensionsDirURL.appendingPathComponent(extensionURL.lastPathComponent)
-                
-                do {
-                    try fileManager.moveItem(at: fileURL, to: destFilePath)
-                    print("Installed extension to: \(destFilePath)")
-                } catch {
-                    print("Error installing extension: \(error.localizedDescription)")
-                }
-            }
-            
-            task.resume()
-        } */
-
-        
-    
-    
-
     @objc private func newTab() {
         // Create a new tab
         let newTab = BrowserViewController()
@@ -331,71 +196,4 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         }
         return true
     }
-    
-        @objc func downloadAndInstallExtension() {
-            let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi")!
-            let task = URLSession.shared.downloadTask(with: extensionURL) { (url, response, error) in
-                guard let fileURL = url, error == nil else {
-                    print("Error downloading file: \(error!.localizedDescription)")
-                    return
-                }
-                print("Downloaded file to: \(fileURL)")
-                self.installExtension(from: fileURL)
-            }
-            task.resume()
-        }
-
-        
-    func downloadFile(at url: URL, completion: @escaping (Result<URL, Error>) -> Void) {
-        let destination = DownloadRequest.suggestedDownloadDestination(for: .cachesDirectory)
-        AF.download(url, to: destination)
-            .responseData { response in
-                switch response.result {
-                case .success(let data):
-                    let fileName = response.response?.suggestedFilename ?? "file.zip"
-                    let fileURL = URL(fileURLWithPath: NSTemporaryDirectory())
-                        .appendingPathComponent(UUID().uuidString)
-                        .appendingPathComponent(fileName)
-                    do {
-                        try data.write(to: fileURL)
-                        completion(.success(fileURL))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-    }
-
-        func extractFile(at zipURL: URL, completion: @escaping (Result<URL, Error>) -> Void) {
-            let extractPath = URL(fileURLWithPath: NSTemporaryDirectory())
-                .appendingPathComponent(UUID().uuidString)
-            do {
-                try SSZipArchive.unzipFile(
-                    atPath: zipURL.path,
-                    toDestination: extractPath.path,
-                    delegate: nil
-                )
-                completion(.success(extractPath))
-            }
-        }
-
-
-        func readManifest(at extractURL: URL, completion: @escaping (Result<XML.Accessor, Error>) -> Void) {
-            do {
-                let manifestURL = extractURL.appendingPathComponent("manifest.xml")
-                let data = try Data(contentsOf: manifestURL)
-                let xml = XML.parse(data)
-                completion(.success(xml))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-
-
-    }
-
-
-
-
+}
