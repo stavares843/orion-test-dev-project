@@ -12,26 +12,50 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
     let firefoxExtensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-483724-latest.xpi")!
 
     override func viewDidLoad() {
-                super.viewDidLoad()
-                
-                // Create a WKWebView instance
-                webView = WKWebView(frame: view.bounds)
-                
-                // Set the custom user agent string to make the website believe that the request is coming from a desktop version of Firefox
-                webView.customUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
+        super.viewDidLoad()
 
-                
-                // Set the navigation delegate to self
-                webView.navigationDelegate = self
-                
-                // Add the web view to the view controller's view
-                view.addSubview(webView)
-                
-                // Load the website
-                let url = URL(string: "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")!
-                let request = URLRequest(url: url)
-                webView.load(request)
-           
+        // Create a WKWebView instance
+        webView = WKWebView(frame: view.bounds)
+
+        // Set the custom user agent string to make the website believe that the request is coming from a desktop version of Firefox
+        webView.customUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
+
+        // Set the navigation delegate to self
+        webView.navigationDelegate = self
+
+        // Add the web view to the view controller's view
+        view.addSubview(webView)
+
+        // Load the website
+        let url = URL(string: "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")!
+        let request = URLRequest(url: url)
+        webView.load(request)
+/*
+        // Add the user script to modify the Firefox add-on button
+        let scriptString = """
+            var button = document.evaluate("//a[contains(@href,'firefox')]/span[contains(text(),'Add to Firefox')]", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
+            if (button) {
+                button.textContent = "Add to Orion";
+            }
+        """
+        let userScript = WKUserScript(source: scriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView.configuration.userContentController.addUserScript(userScript) */
+        
+        // Inject JavaScript to modify the Firefox add-on button
+        // Get a reference to the WKWebView instance
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            let javascript = "document.querySelector('.Button--action').textContent = '+ Add to Orion';"
+            self.webView.evaluateJavaScript(javascript) { (result, error) in
+                if let error = error {
+                    print("Error evaluating JavaScript: \(error.localizedDescription)")
+                } else {
+                    print("JavaScript executed successfully")
+                }
+            }
+        }
+
+
+        
         // Create the URL bar
         let toolbar = UIToolbar()
         toolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -80,30 +104,46 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             webView.bottomAnchor.constraint(equalTo: toolbar.topAnchor)
         ])
     }
-
+   
     @objc private func installExtension() {
-        let urlString = "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-483724-latest.xpi"
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.downloadTask(with: url) { (url, _, error) in
-            if let error = error {
-                print("Error downloading extension: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let url = url else { return }
-            let fileManager = FileManager.default
-            let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
-            let destinationUrl = documentDirectory.appendingPathComponent(url.lastPathComponent)
-            
-            do {
-                try fileManager.moveItem(at: url, to: destinationUrl)
-                print("Extension downloaded and saved to \(destinationUrl.absoluteString)")
-            } catch {
-                print("Error moving file: \(error.localizedDescription)")
-            }
-        }.resume()
+        // Copy the extension file to the Library directory
+        let fileManager = FileManager.default
+        let libraryDirectory = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+        let extensionDirectory = "\(libraryDirectory)/Application Support/Firefox/Profiles/default/extensions"
+        let sourceFilePath = Bundle.main.path(forResource: "myextension", ofType: "xpi")!
+        let destinationFilePath = "\(extensionDirectory)/myextension.xpi"
+
+        do {
+            try fileManager.copyItem(atPath: sourceFilePath, toPath: destinationFilePath)
+            print("Extension file copied to Library directory")
+        } catch {
+            print("Error copying extension file: \(error.localizedDescription)")
+            return
+        }
+
+        // Move the extension file to the extensions directory
+        let destinationDirectory = "\(extensionDirectory)/myextension@mycompany.com"
+        do {
+            try fileManager.moveItem(atPath: destinationFilePath, toPath: destinationDirectory)
+            print("Extension file moved to extensions directory")
+        } catch {
+            print("Error moving extension file: \(error.localizedDescription)")
+            return
+        }
+
+        // Inject JavaScript to modify the Firefox add-on button
+        // Create a user script that modifies the Firefox add-on button text
+        let script = WKUserScript(source: """
+              var button = document.evaluate("//a[contains(@href,'firefox')]/span[contains(text(),'Add to Firefox')]", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
+              if (button) {
+                  button.textContent = "Add to Orion";
+              }
+          """, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+          webView.configuration.userContentController.addUserScript(script)
     }
+
+
+
 
     // MARK: - Navigation
 
