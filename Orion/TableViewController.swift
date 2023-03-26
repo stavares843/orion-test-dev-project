@@ -3,7 +3,7 @@ import UIKit
 class TableViewController: UITableViewController {
 
     let data = ["Apple", "Banana", "Orange", "Pear", "Grape"]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

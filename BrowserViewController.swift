@@ -1,8 +1,16 @@
 import UIKit
 import WebKit
 import SafariServices
+import SSZipArchive
+import Alamofire
+import SwiftyXMLParser
 
 class BrowserViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegate, WKUIDelegate {
+    struct Manifest: Codable {
+           let name: String
+           let version: String
+           let description: String
+       }
 
     var webView: WKWebView!
     var urlTextField: UITextField!
@@ -30,22 +38,17 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         let url = URL(string: "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")!
         let request = URLRequest(url: url)
         webView.load(request)
-/*
-        // Add the user script to modify the Firefox add-on button
-        let scriptString = """
-            var button = document.evaluate("//a[contains(@href,'firefox')]/span[contains(text(),'Add to Firefox')]", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
-            if (button) {
-                button.textContent = "Add to Orion";
-            }
-        """
-        let userScript = WKUserScript(source: scriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        webView.configuration.userContentController.addUserScript(userScript) */
-        
+
         // Inject JavaScript to modify the Firefox add-on button
         // Get a reference to the WKWebView instance
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let javascript = "document.querySelector('.Button--action').textContent = '+ Add to Orion';"
-            self.webView.evaluateJavaScript(javascript) { (result, error) in
+            let javascript = """
+                document.querySelector('.Button--action').addEventListener('click', function() {
+                    webkit.messageHandlers.installExtension.postMessage("");
+                });
+                document.querySelector('.Button--action').textContent = '+ Add to Orion';
+            """
+            self.webView.evaluateJavaScript(javascript) { (_, error) in
                 if let error = error {
                     print("Error evaluating JavaScript: \(error.localizedDescription)")
                 } else {
@@ -54,8 +57,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             }
         }
 
-
-        
         // Create the URL bar
         let toolbar = UIToolbar()
         toolbar.translatesAutoresizingMaskIntoConstraints = false
@@ -73,14 +74,14 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         let urlBar = UIBarButtonItem(customView: urlTextField)
         toolbar.items = [backButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), urlBar]
 
-        let installButton = UIBarButtonItem(title: "Install Extension", style: .plain, target: self, action: #selector(installExtension))
-        navigationItem.rightBarButtonItem = installButton
+      //  let installButton = UIBarButtonItem(title: "Install Extension", style: .plain, target: self, action: #selector(installExtension))
+      //  navigationItem.rightBarButtonItem = installButton
 
         // Add the toolbar to the bottom of the view
         NSLayoutConstraint.activate([
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            toolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         // Create the "+" button for new tabs
@@ -104,7 +105,32 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             webView.bottomAnchor.constraint(equalTo: toolbar.topAnchor)
         ])
     }
-   
+}
+    extension BrowserViewController {
+        func downloadAndExtractPackage(url: URL) {
+            let downloadTask = URLSession.shared.downloadTask(with: url) { location, _, error in
+                guard let location = location else {
+                    print("Failed to download package: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+                let destinationUrl = documentsUrl.appendingPathComponent("package.zip")
+
+                do {
+                    try FileManager.default.moveItem(at: location, to: destinationUrl)
+                    try SSZipArchive.unzipFile(atPath: destinationUrl.path, toDestination: documentsUrl.path)
+                    let manifestUrl = documentsUrl.appendingPathComponent("manifest.json")
+                    let manifestData = try Data(contentsOf: manifestUrl)
+                    let decoder = JSONDecoder()
+                    let manifest = try decoder.decode(Manifest.self, from: manifestData)
+                    // Do something with the manifest data here
+                } catch {
+                    print("Failed to extract package: \(error.localizedDescription)")
+                }
+            }
+            downloadTask.resume()
+        }
+
     @objc private func installExtension() {
         // Copy the extension file to the Library directory
         let fileManager = FileManager.default
@@ -130,61 +156,139 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             print("Error moving extension file: \(error.localizedDescription)")
             return
         }
-
-        // Inject JavaScript to modify the Firefox add-on button
-        // Create a user script that modifies the Firefox add-on button text
-        let script = WKUserScript(source: """
-              var button = document.evaluate("//a[contains(@href,'firefox')]/span[contains(text(),'Add to Firefox')]", document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null).snapshotItem(0);
-              if (button) {
-                  button.textContent = "Add to Orion";
-              }
-          """, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-          webView.configuration.userContentController.addUserScript(script)
     }
 
-
-
-
-    // MARK: - Navigation
+    @objc private func newTab() {
+        // Create a new tab
+        let newTab = BrowserViewController()
+        navigationController?.pushViewController(newTab, animated: true)
+    }
 
     @objc private func goBack() {
+        // Go back to the previous page
         if webView.canGoBack {
             webView.goBack()
         }
     }
 
-    @objc private func newTab() {
-        let newViewController = BrowserViewController()
-        navigationController?.pushViewController(newViewController, animated: true)
+    // MARK: - WKNavigationDelegate
+
+    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+        // Update the URL text field when the page starts loading
+        urlTextField.text = webView.url?.absoluteString
     }
 
-    // MARK: - URL Text Field
+        func downloadFile(at url: URL, completion: @escaping (Result<URL, Error>) -> Void) {
+                let destination = DownloadRequest.suggestedDownloadDestination(for: .cachesDirectory)
+                AF.download(url, to: destination)
+                    .responseData { response in
+                        switch response.result {
+                        case .success(let data):
+                            let fileName = response.response?.suggestedFilename ?? "file.zip"
+                            let fileURL = URL(fileURLWithPath: NSTemporaryDirectory())
+                                .appendingPathComponent(UUID().uuidString)
+                                .appendingPathComponent(fileName)
+                            do {
+                                try data.write(to: fileURL)
+                                completion(.success(fileURL))
+                            } catch {
+                                completion(.failure(error))
+                            }
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+
+                        func extractFile(at zipURL: URL, completion: @escaping (Result<URL, Error>) -> Void) {
+                                    let extractPath = URL(fileURLWithPath: NSTemporaryDirectory())
+                                        .appendingPathComponent(UUID().uuidString)
+                                    do {
+                                        try SSZipArchive.unzipFile(
+                                            atPath: zipURL.path,
+                                            toDestination: extractPath.path,
+                                            delegate: nil
+                                        )
+                                        completion(.success(extractPath))
+                                    }
+                                }
+
+                        func readManifest(at extractURL: URL, completion: @escaping (Result<XML.Accessor, Error>) -> Void) {
+                                    do {
+                                        let manifestURL = extractURL.appendingPathComponent("manifest.xml")
+                                        let data = try Data(contentsOf: manifestURL)
+                                        let xml = XML.parse(data)
+                                        completion(.success(xml))
+                                    } catch {
+                                        completion(.failure(error))
+                                    }
+
+                            func downloadAndInstallExtension() {
+                                guard let url = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/latest.xpi") else {
+                                    print("Invalid URL")
+                                    return
+                                }
+
+                                // Download the extension
+                                self.downloadFile(at: url) { result in
+                                    switch result {
+                                    case .success(let zipURL):
+                                        print("Extension downloaded to: \(zipURL.path)")
+
+                                        // Extract the extension
+                                        extractFile(at: zipURL) { result in
+                                            switch result {
+                                            case .success(let extractURL):
+                                                print("Extension extracted to: \(extractURL.path)")
+
+                                                // Read the extension manifest
+                                                readManifest(at: extractURL) { result in
+                                                    switch result {
+                                                    case .success(let manifest):
+                                                        // Check if the extension is compatible with the current browser
+                                                        let isCompatible = manifest["em:targetApplication"].all?.first?["em:id"].text == "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                                                        if isCompatible {
+                                                            // Copy the extension files to the appropriate directory
+                                                            let fileManager = FileManager.default
+                                                            let libraryDirectory = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0]
+                                                            let extensionDirectory = "\(libraryDirectory)/Application Support/Firefox/Profiles/default/extensions"
+                                                            let sourceDirectory = extractURL.appendingPathComponent("chrome")
+                                                            let destinationDirectory = "\(extensionDirectory)/topsites"
+                                                            do {
+                                                                try fileManager.createDirectory(atPath: destinationDirectory, withIntermediateDirectories: true, attributes: nil)
+                                                                try fileManager.copyItem(atPath: sourceDirectory.path, toPath: destinationDirectory)
+                                                                print("Extension installed successfully")
+                                                            } catch {
+                                                                print("Error installing extension: \(error.localizedDescription)")
+                                                            }
+                                                        } else {
+                                                            print("Extension is not compatible with the current browser")
+                                                        }
+                                                    case .failure(let error):
+                                                        print("Error reading extension manifest: \(error.localizedDescription)")
+                                                    }
+                                                }
+
+                                            case .failure(let error):
+                                                print("Error extracting extension: \(error.localizedDescription)")
+                                            }
+                                        }
+
+                                    case .failure(let error):
+                                        print("Error downloading extension: \(error.localizedDescription)")
+                                    }
 
     // MARK: - UITextFieldDelegate
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        
-        guard let text = textField.text, let url = URL(string: text) else {
-            return false
+        // Load the requested URL when the user presses Enter
+        if let text = textField.text, let url = URL(string: text) {
+            self.webView.load(URLRequest(url: url))
+            textField.resignFirstResponder()
         }
-        
-        if let firefoxUrlScheme = URL(string: "firefox://open-url?url=\(url.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"), UIApplication.shared.canOpenURL(firefoxUrlScheme) {
-            UIApplication.shared.open(firefoxUrlScheme, options: [:], completionHandler: nil)
-        } else {
-            let safariVC = SFSafariViewController(url: url)
-            present(safariVC, animated: true)
-        }
-        
         return true
+        }
     }
-
-
-
-    // MARK: - WKNavigationDelegate
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        backButton.isEnabled = webView.canGoBack
-        urlTextField.text = webView.url?.absoluteString
+}
+    }
+}
     }
 }
