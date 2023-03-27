@@ -1,9 +1,5 @@
 import UIKit
 import WebKit
-import SafariServices
-import SSZipArchive
-import Alamofire
-import SwiftyXMLParser
 
 class BrowserViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegate, WKUIDelegate, WKScriptMessageHandler {
 

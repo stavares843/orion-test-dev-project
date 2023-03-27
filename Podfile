@@ -6,11 +6,6 @@ target 'Orion' do
   use_frameworks!
 
   # Pods for Orion
-pod 'SSZipArchive'
-pod 'Alamofire'
-pod 'SwiftyXMLParser'
-pod 'SwiftyJSON'
-pod 'SSZipArchive'
 
   target 'OrionTests' do
     inherit! :search_paths

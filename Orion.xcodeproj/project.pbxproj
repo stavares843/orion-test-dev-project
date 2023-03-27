@@ -193,7 +193,6 @@
 				56D0E39029CF88C600E32EC2 /* Sources */,
 				56D0E39129CF88C600E32EC2 /* Frameworks */,
 				56D0E39229CF88C600E32EC2 /* Resources */,
-				6EF7CBD80647B5AF28C29B23 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -231,7 +230,6 @@
 				56D0E3B029CF88C700E32EC2 /* Sources */,
 				56D0E3B129CF88C700E32EC2 /* Frameworks */,
 				56D0E3B229CF88C700E32EC2 /* Resources */,
-				4AF8D6BCE4AFEA8CB7CF24C5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -357,40 +355,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4AF8D6BCE4AFEA8CB7CF24C5 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6EF7CBD80647B5AF28C29B23 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Orion/Pods-Orion-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Orion/Pods-Orion-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Orion/Pods-Orion-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D00414BA9AD88A3BCB3A0788 /* [CP] Check Pods Manifest.lock */ = {
