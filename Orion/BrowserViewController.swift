@@ -118,7 +118,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         ])
     }
 
-    @objc private func installExtension(from fileURL: URL) {
+    @objc public func installExtension(from fileURL: URL) {
         guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
             print("Error: Invalid extension URL")
             return

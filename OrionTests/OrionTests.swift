@@ -1,36 +1,65 @@
-//
-//  OrionTests.swift
-//  OrionTests
-//
-//  Created by Sara on 25/03/2023.
-//
-
 import XCTest
+
 @testable import Orion
 
-class OrionTests: XCTestCase {
+class BrowserViewControllerTests: XCTestCase {
+
+    var sut: BrowserViewController!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = BrowserViewController()
+        sut.loadViewIfNeeded()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        try super.tearDownWithError()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testWebViewLoadsWebsite() {
+        // Given
+        let expectedUrl = URL(string: "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")!
+
+        // When
+        sut.viewDidLoad()
+
+        // Then
+        XCTAssertEqual(sut.webView.url, expectedUrl)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testWebView_CustomUserAgent() {
+            sut.viewDidLoad()
+            XCTAssertEqual(sut.webView.customUserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0")
         }
+    
+    func testLoadingURL() {
+            // Set the URL text field to a test URL and call the textFieldShouldReturn(_:) method
+            sut.urlTextField.text = "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/"
+            let shouldReturn = sut.textFieldShouldReturn(sut.urlTextField)
+
+            // Verify that the web view is loaded with the expected URL
+            XCTAssertTrue(shouldReturn)
+            XCTAssertEqual(sut.webView.url?.absoluteString, "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")
+        }
+    
+    /*func testInstallExtension() { // skip test because extension is not really installed
+        // Given
+        let extensionUrl = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi")!
+        let expectation = self.expectation(description: "extension downloaded")
+
+        // When
+        sut.installExtension(from: extensionUrl)
+
+        // Then
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+            let fileManager = FileManager.default
+            let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Extensions")
+            let installedExtension = extensionsDirURL.appendingPathComponent("topsitesbutton@mozilla.org.xpi")
+            XCTAssertTrue(fileManager.fileExists(atPath: installedExtension.path))
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 15.0, handler: nil)*/
     }
 
-}
