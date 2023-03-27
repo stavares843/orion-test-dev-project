@@ -43,6 +43,19 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         let url = URL(string: "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")!
         let request = URLRequest(url: url)
         webView.load(request)
+        // Observe when the keyboard is shown and hidden
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { notification in
+            guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+            let keyboardHeight = keyboardFrame.height
+
+            // Adjust the bottom constraint of the text field
+            self.urlTextField.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -keyboardHeight).isActive = true
+        }
+
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { _ in
+            // Reset the bottom constraint of the text field
+            self.urlTextField.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
 

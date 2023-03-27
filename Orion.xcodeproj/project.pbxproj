@@ -45,7 +45,7 @@
 		2630E1858C61ACF87FE4117E /* Pods-Orion-OrionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion-OrionUITests.release.xcconfig"; path = "Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3EE66DDC48B6A150E565925D /* Pods-Orion-OrionUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion-OrionUITests.debug.xcconfig"; path = "Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		4A44752781EB336A9FC84490 /* Pods_OrionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		564D47E829D0FEBC00AEC1FA /* TopSitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopSitesViewController.swift; path = ../TopSitesViewController.swift; sourceTree = "<group>"; };
+		564D47E829D0FEBC00AEC1FA /* TopSitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSitesViewController.swift; sourceTree = "<group>"; };
 		56853C7A29D05F5B00FF7425 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		56D0E39429CF88C600E32EC2 /* Orion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D0E39729CF88C600E32EC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 		56D0E39629CF88C600E32EC2 /* Orion */ = {
 			isa = PBXGroup;
 			children = (
-				56853C7A29D05F5B00FF7425 /* manifest.json */,
 				564D47E829D0FEBC00AEC1FA /* TopSitesViewController.swift */,
+				56853C7A29D05F5B00FF7425 /* manifest.json */,
 				56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */,
 				56D0E39729CF88C600E32EC2 /* AppDelegate.swift */,
 				56D0E39929CF88C600E32EC2 /* SceneDelegate.swift */,

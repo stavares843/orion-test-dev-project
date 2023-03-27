@@ -1,42 +1,36 @@
-//
-//  OrionUITests.swift
-//  OrionUITests
-//
-//  Created by Sara on 25/03/2023.
-//
-
 import XCTest
+@testable import Orion
 
-class OrionUITests: XCTestCase {
+extension XCUIElement {
+    func clearAndEnterText(_ text: String) {
+        guard let stringValue = self.value as? String else {
+            XCTFail("Tried to clear and enter text into a non-string value")
+            return
+        }
+        self.tap()
+        let deleteString = String(repeating: XCUIKeyboardKey.delete.rawValue, count: stringValue.count)
+        self.typeText(deleteString)
+        self.typeText(text)
+    }
+}
+
+class BrowserViewControllerTests: XCTestCase {
+
+    var app: XCUIApplication!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testClearAndTypeText() {
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        let textField = XCUIApplication().toolbars["Toolbar"].children(matching: .other).element.children(matching: .other).element.children(matching: .textField).element
+                textField.clearAndEnterText("apple.com")
     }
 }
