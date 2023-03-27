@@ -21,7 +21,6 @@
 		56D0E3BB29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3BA29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift */; };
 		56D0E3C829CF88ED00E32EC2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3C729CF88ED00E32EC2 /* TableViewController.swift */; };
 		56D0E3CA29CF890D00E32EC2 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */; };
-		56D0E3CC29CF8DEE00E32EC2 /* TopSites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3CB29CF8DEE00E32EC2 /* TopSites.swift */; };
 		57E916A41788BD1674989F7F /* Pods_Orion_OrionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3655D2D13DC039A4E74119 /* Pods_Orion_OrionUITests.framework */; };
 		6AD042DC85D550CC12C8186E /* Pods_OrionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A44752781EB336A9FC84490 /* Pods_OrionTests.framework */; };
 /* End PBXBuildFile section */
@@ -65,7 +64,6 @@
 		56D0E3BA29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		56D0E3C729CF88ED00E32EC2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
-		56D0E3CB29CF8DEE00E32EC2 /* TopSites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSites.swift; sourceTree = "<group>"; };
 		6C804680AC45127C0EB07324 /* Pods-OrionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrionTests.release.xcconfig"; path = "Target Support Files/Pods-OrionTests/Pods-OrionTests.release.xcconfig"; sourceTree = "<group>"; };
 		8FBB4FEA0837442E1D5CAC91 /* Pods-Orion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion.release.xcconfig"; path = "Target Support Files/Pods-Orion/Pods-Orion.release.xcconfig"; sourceTree = "<group>"; };
 		96D834603308777D1C5DC464 /* Pods_Orion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Orion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +128,6 @@
 				564D47E829D0FEBC00AEC1FA /* ExtensionOutputController.swift */,
 				56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */,
 				56D0E39729CF88C600E32EC2 /* AppDelegate.swift */,
-				56D0E3CB29CF8DEE00E32EC2 /* TopSites.swift */,
 				56D0E39929CF88C600E32EC2 /* SceneDelegate.swift */,
 				56D0E39B29CF88C600E32EC2 /* ViewController.swift */,
 				56D0E3C729CF88ED00E32EC2 /* TableViewController.swift */,
@@ -388,7 +385,6 @@
 			files = (
 				56D0E39C29CF88C600E32EC2 /* ViewController.swift in Sources */,
 				56D0E39829CF88C600E32EC2 /* AppDelegate.swift in Sources */,
-				56D0E3CC29CF8DEE00E32EC2 /* TopSites.swift in Sources */,
 				564D47E929D0FEBC00AEC1FA /* ExtensionOutputController.swift in Sources */,
 				56D0E3CA29CF890D00E32EC2 /* BrowserViewController.swift in Sources */,
 				56D0E39A29CF88C600E32EC2 /* SceneDelegate.swift in Sources */,
