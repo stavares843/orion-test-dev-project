@@ -1,33 +1,48 @@
 import UIKit
 import WebKit
 
-class ExtensionOutputController: UIViewController, WKNavigationDelegate {
+class TopSitesViewController: UIViewController, WKNavigationDelegate {
 
-    var webView: WKWebView!
-    var fileURL: URL?
+    // MARK: - Properties
+    
+    private var webView: WKWebView!
+    private var fileURL: URL?
 
+    // MARK: - Initialization
+    
     convenience init(extensionFileURL: URL) {
-        self.init()
+        self.init(nibName: nil, bundle: nil)
         fileURL = extensionFileURL
     }
-
+    
+    // MARK: - View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Create a web view
+        
+        setupWebView()
+        loadExtensionOutput()
+    }
+    
+    deinit {
+        webView.removeFromSuperview()
+        webView = nil
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupWebView() {
         webView = WKWebView(frame: view.bounds)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.navigationDelegate = self
-
-        // Add the web view to the view hierarchy
         view.addSubview(webView)
-
-        // Load the extension output in the web view
-        if let fileURL = fileURL {
-            webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
-        }
-
-        // Call getTopSites to get the top sites
+    }
+    
+    private func loadExtensionOutput() {
+        guard let fileURL = fileURL else { return }
+        
+        webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
+        
         let urls = getTopSites()
         let htmlString = """
             <html>
@@ -62,12 +77,14 @@ class ExtensionOutputController: UIViewController, WKNavigationDelegate {
                 </body>
             </html>
             """
+        
         DispatchQueue.main.async {
             self.webView.loadHTMLString(htmlString, baseURL: nil)
         }
-    }
 
-    func getTopSites() -> [String] {
+    }
+    
+    private func getTopSites() -> [String] {
         return [
             "https://www.google.com",
             "https://www.youtube.com",

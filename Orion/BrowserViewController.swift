@@ -149,7 +149,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
                 print("Installed extension to: \(extensionsDirURL)")
 
                 DispatchQueue.main.async {
-                    let outputController = ExtensionOutputController(extensionFileURL: destFilePath)
+                    let outputController = TopSitesViewController(extensionFileURL: destFilePath)
                     self.navigationController?.pushViewController(outputController, animated: true)
                 }
             } catch {
