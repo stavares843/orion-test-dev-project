@@ -12,14 +12,12 @@
 		56853C7B29D05F5B00FF7425 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 56853C7A29D05F5B00FF7425 /* manifest.json */; };
 		56D0E39829CF88C600E32EC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E39729CF88C600E32EC2 /* AppDelegate.swift */; };
 		56D0E39A29CF88C600E32EC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E39929CF88C600E32EC2 /* SceneDelegate.swift */; };
-		56D0E39C29CF88C600E32EC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E39B29CF88C600E32EC2 /* ViewController.swift */; };
 		56D0E39F29CF88C600E32EC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D0E39D29CF88C600E32EC2 /* Main.storyboard */; };
 		56D0E3A129CF88C600E32EC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56D0E3A029CF88C600E32EC2 /* Assets.xcassets */; };
 		56D0E3A429CF88C600E32EC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56D0E3A229CF88C600E32EC2 /* LaunchScreen.storyboard */; };
 		56D0E3AF29CF88C700E32EC2 /* OrionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3AE29CF88C700E32EC2 /* OrionTests.swift */; };
 		56D0E3B929CF88C700E32EC2 /* OrionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3B829CF88C700E32EC2 /* OrionUITests.swift */; };
 		56D0E3BB29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3BA29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift */; };
-		56D0E3C829CF88ED00E32EC2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3C729CF88ED00E32EC2 /* TableViewController.swift */; };
 		56D0E3CA29CF890D00E32EC2 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */; };
 		57E916A41788BD1674989F7F /* Pods_Orion_OrionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3655D2D13DC039A4E74119 /* Pods_Orion_OrionUITests.framework */; };
 		6AD042DC85D550CC12C8186E /* Pods_OrionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A44752781EB336A9FC84490 /* Pods_OrionTests.framework */; };
@@ -52,7 +50,6 @@
 		56D0E39429CF88C600E32EC2 /* Orion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D0E39729CF88C600E32EC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56D0E39929CF88C600E32EC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		56D0E39B29CF88C600E32EC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		56D0E39E29CF88C600E32EC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56D0E3A029CF88C600E32EC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56D0E3A329CF88C600E32EC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		56D0E3B429CF88C700E32EC2 /* OrionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56D0E3B829CF88C700E32EC2 /* OrionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrionUITests.swift; sourceTree = "<group>"; };
 		56D0E3BA29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrionUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		56D0E3C729CF88ED00E32EC2 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		6C804680AC45127C0EB07324 /* Pods-OrionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrionTests.release.xcconfig"; path = "Target Support Files/Pods-OrionTests/Pods-OrionTests.release.xcconfig"; sourceTree = "<group>"; };
 		8FBB4FEA0837442E1D5CAC91 /* Pods-Orion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion.release.xcconfig"; path = "Target Support Files/Pods-Orion/Pods-Orion.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,8 +125,6 @@
 				56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */,
 				56D0E39729CF88C600E32EC2 /* AppDelegate.swift */,
 				56D0E39929CF88C600E32EC2 /* SceneDelegate.swift */,
-				56D0E39B29CF88C600E32EC2 /* ViewController.swift */,
-				56D0E3C729CF88ED00E32EC2 /* TableViewController.swift */,
 				56D0E39D29CF88C600E32EC2 /* Main.storyboard */,
 				56D0E3A029CF88C600E32EC2 /* Assets.xcassets */,
 				56D0E3A229CF88C600E32EC2 /* LaunchScreen.storyboard */,
@@ -383,12 +377,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56D0E39C29CF88C600E32EC2 /* ViewController.swift in Sources */,
 				56D0E39829CF88C600E32EC2 /* AppDelegate.swift in Sources */,
 				564D47E929D0FEBC00AEC1FA /* ExtensionOutputController.swift in Sources */,
 				56D0E3CA29CF890D00E32EC2 /* BrowserViewController.swift in Sources */,
 				56D0E39A29CF88C600E32EC2 /* SceneDelegate.swift in Sources */,
-				56D0E3C829CF88ED00E32EC2 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

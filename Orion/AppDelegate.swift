@@ -14,8 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Create TabBarController and set it as root view controller
         let tabBarController = UITabBarController()
         let viewController1 = BrowserViewController()
-        let viewController2 = TableViewController()
-        tabBarController.viewControllers = [viewController1, viewController2]
+        tabBarController.viewControllers = [viewController1]
         window?.rootViewController = tabBarController
 
         // Change the tint color of the tab bar items to white
