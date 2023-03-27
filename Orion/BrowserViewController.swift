@@ -97,9 +97,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         let urlBar = UIBarButtonItem(customView: urlTextField)
         toolbar.items = [backButton, UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil), urlBar]
 
-      //  let installButton = UIBarButtonItem(title: "Install Extension", style: .plain, target: self, action: #selector(installExtension))
-      //  navigationItem.rightBarButtonItem = installButton
-
         // Add the toolbar to the bottom of the view
         NSLayoutConstraint.activate([
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -129,32 +126,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             webView.bottomAnchor.constraint(equalTo: toolbar.topAnchor)
         ])
     }
-    /*
-    @objc private func installExtension(from fileURL: URL) {
-        let fileManager = FileManager.default
-        let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
-        print("Extensions directory URL: \(extensionsDirURL)")
-
-        let destFilePath = extensionsDirURL.appendingPathComponent(fileURL.lastPathComponent)
-
-        do {
-            // Check if the "Extensions" folder exists, and create it if not
-            if !fileManager.fileExists(atPath: extensionsDirURL.path) {
-                try fileManager.createDirectory(at: extensionsDirURL, withIntermediateDirectories: true, attributes: nil)
-            }
-            
-            // Move the XPI file to the "Extensions" folder
-            try fileManager.moveItem(at: fileURL, to: destFilePath)
-            print("Installed extension to: \(destFilePath)")
-            
-            DispatchQueue.main.async {
-                let outputController = ExtensionOutputController(extensionFileURL: destFilePath)
-                self.navigationController?.pushViewController(outputController, animated: true)
-            }
-        } catch {
-            print("Error installing extension: \(error.localizedDescription)")
-        }
-    } */
 
     @objc private func installExtension(from fileURL: URL) {
         guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
@@ -198,33 +169,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
 
         task.resume()
     }
-
-    /* // download works
-    @objc private func installExtension(from fileURL: URL) {
-        let task = URLSession.shared.downloadTask(with: fileURL) { (url, response, error) in
-            guard let extensionURL = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi") else {
-                    print("Error: Invalid extension URL")
-                    return
-                }
-            print("Downloaded file to: \(fileURL)")
-            
-            let fileManager = FileManager.default
-            let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
-            let destFilePath = extensionsDirURL.appendingPathComponent(fileURL.lastPathComponent)
-            
-            do {
-                try fileManager.moveItem(at: fileURL, to: destFilePath)
-                print("Installed extension to: \(destFilePath)")
-                DispatchQueue.main.async {
-                    let outputController = ExtensionOutputController()
-                    self.navigationController?.pushViewController(outputController, animated: true)
-                }
-            } catch {
-                print("Error installing extension: \(error.localizedDescription)")
-            }
-        }
-        task.resume()
-    } */
 
     func downloadExtension(extensionURL: URL) {
         let task = URLSession.shared.downloadTask(with: extensionURL) { localURL, urlResponse, error in
@@ -276,52 +220,12 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
 
         print("Starting download task...")
         downloadTask.resume()
-
     }
-
 
     @objc private func showExtensionOutput() {
         // TODO: Implement the code to show the extension output in a new tab
         print("Showing extension output")
     }
-
-        /*
-        @objc private func installExtension(from fileURL: URL) {
-            let task = URLSession.shared.downloadTask(with: fileURL) { (url, response, error) in
-                if let error = error {
-                    print("Error downloading file: \(error.localizedDescription)")
-                    return
-                }
-                
-                guard let downloadURL = url else {
-                    print("Error: No URL returned for downloaded file")
-                    return
-                }
-                
-                print("Downloaded file to: \(downloadURL)")
-                
-                let fileManager = FileManager.default
-                let extensionsDirURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask)[0].appendingPathComponent("Application Support/Firefox/Extensions", isDirectory: true)
-                
-                do {
-                    try fileManager.createDirectory(at: extensionsDirURL, withIntermediateDirectories: true, attributes: nil)
-                } catch {
-                    print("Error creating extensions directory: \(error.localizedDescription)")
-                    return
-                }
-                
-                let destFilePath = extensionsDirURL.appendingPathComponent(downloadURL.lastPathComponent)
-                
-                do {
-                    try fileManager.moveItem(at: downloadURL, to: destFilePath)
-                    print("Installed extension to: \(destFilePath)")
-                } catch {
-                    print("Error installing extension: \(error.localizedDescription)")
-                }
-            }
-            
-            task.resume()
-        }*/
 
     @objc private func newTab() {
         // Create a new tab
