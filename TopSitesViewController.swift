@@ -4,45 +4,45 @@ import WebKit
 class TopSitesViewController: UIViewController, WKNavigationDelegate {
 
     // MARK: - Properties
-    
+
     private var webView: WKWebView!
     private var fileURL: URL?
 
     // MARK: - Initialization
-    
+
     convenience init(extensionFileURL: URL) {
         self.init(nibName: nil, bundle: nil)
         fileURL = extensionFileURL
     }
-    
+
     // MARK: - View Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupWebView()
         loadExtensionOutput()
     }
-    
+
     deinit {
         webView.removeFromSuperview()
         webView = nil
     }
-    
+
     // MARK: - Private Methods
-    
+
     private func setupWebView() {
         webView = WKWebView(frame: view.bounds)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.navigationDelegate = self
         view.addSubview(webView)
     }
-    
+
     private func loadExtensionOutput() {
         guard let fileURL = fileURL else { return }
-        
+
         webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
-        
+
         let urls = getTopSites()
         let htmlString = """
             <html>
@@ -77,13 +77,13 @@ class TopSitesViewController: UIViewController, WKNavigationDelegate {
                 </body>
             </html>
             """
-        
+
         DispatchQueue.main.async {
             self.webView.loadHTMLString(htmlString, baseURL: nil)
         }
 
     }
-    
+
     private func getTopSites() -> [String] {
         return [
             "https://www.google.com",

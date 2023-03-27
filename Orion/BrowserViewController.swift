@@ -16,11 +16,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
 
         installExtension(from: extensionURL)
     }
-    struct Manifest: Codable {
-           let name: String
-           let version: String
-           let description: String
-       }
 
     var webView: WKWebView!
     var urlTextField: UITextField!
