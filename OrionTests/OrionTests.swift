@@ -17,7 +17,6 @@ class BrowserViewControllerTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    
     func testWebViewLoadsWebsite() {
         // Given
         let expectedUrl = URL(string: "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")!
@@ -33,7 +32,7 @@ class BrowserViewControllerTests: XCTestCase {
             sut.viewDidLoad()
             XCTAssertEqual(sut.webView.customUserAgent, "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0")
         }
-    
+
     func testLoadingURL() {
             // Set the URL text field to a test URL and call the textFieldShouldReturn(_:) method
             sut.urlTextField.text = "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/"
@@ -43,7 +42,7 @@ class BrowserViewControllerTests: XCTestCase {
             XCTAssertTrue(shouldReturn)
             XCTAssertEqual(sut.webView.url?.absoluteString, "https://addons.mozilla.org/en-US/firefox/addon/top-sites-button/")
         }
-    
+
     /*func testInstallExtension() { // skip test because extension is not really installed
         // Given
         let extensionUrl = URL(string: "https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi")!
@@ -62,4 +61,3 @@ class BrowserViewControllerTests: XCTestCase {
         }
         waitForExpectations(timeout: 15.0, handler: nil)*/
     }
-
