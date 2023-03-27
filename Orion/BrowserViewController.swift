@@ -4,25 +4,22 @@ import SafariServices
 import SSZipArchive
 import Alamofire
 import SwiftyXMLParser
-import SSZipArchive
 
-    
 class BrowserViewController: UIViewController, WKNavigationDelegate, UITextFieldDelegate, WKUIDelegate, WKScriptMessageHandler {
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         guard message.name == "installExtension" else {
             return
         }
-        
+
         guard let extensionURLString = message.body as? String,
               let extensionURL = URL(string: extensionURLString) else {
             print("Error: Invalid extension URL")
             return
         }
-        
+
         installExtension(from: extensionURL)
     }
-
 
     struct Manifest: Codable {
            let name: String
@@ -30,7 +27,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
            let description: String
        }
 
-    
     var webView: WKWebView!
     var urlTextField: UITextField!
     var backButton: UIBarButtonItem!
@@ -59,7 +55,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         webView.load(request)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            
+
             let javascript = """
                 document.querySelector('.Button--action').addEventListener('click', function() {
                     webkit.messageHandlers.installExtension.postMessage("https://addons.mozilla.org/firefox/downloads/latest/top-sites-button/addon-1865-latest.xpi");
@@ -71,7 +67,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
                     print("Error evaluating JavaScript: \(error.localizedDescription)")
                 } else {
                     print("JavaScript executed successfully")
-                    
+
                     // Add code to download and install the extension when the button is tapped
                     let userScript = WKUserScript(source: "window.webkit.messageHandlers.installExtensionButton = { postMessage: function(url) { window.location.href = url; } }", injectionTime: .atDocumentStart, forMainFrameOnly: true)
                     self.webView.configuration.userContentController.addUserScript(userScript)
@@ -79,8 +75,8 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
                 }
             }
         }
-        
-        //Create the URL bar
+
+        // Create the URL bar
         let toolbar = UIToolbar()
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(toolbar)
@@ -101,7 +97,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         NSLayoutConstraint.activate([
             toolbar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             toolbar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            toolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
 
         // Create the "+" button for new tabs
@@ -115,7 +111,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
 
         // Increase the width of the URL text field
         urlTextField.widthAnchor.constraint(equalToConstant: 350).isActive = true
-
 
         // Add the web view constraints
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +128,7 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             return
         }
 
-        let task = URLSession.shared.downloadTask(with: extensionURL) { (url, response, error) in
+        let task = URLSession.shared.downloadTask(with: extensionURL) { (url, _, error) in
             if let error = error {
                 print("Error downloading extension: \(error.localizedDescription)")
                 return
@@ -171,18 +166,18 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
     }
 
     func downloadExtension(extensionURL: URL) {
-        let task = URLSession.shared.downloadTask(with: extensionURL) { localURL, urlResponse, error in
+        let task = URLSession.shared.downloadTask(with: extensionURL) { localURL, _, error in
             guard let localURL = localURL else {
                 print("Error downloading extension: \(error?.localizedDescription ?? "Unknown error")")
                 return
             }
-            
+
             do {
                 let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
                 let destinationURL = documentsURL.appendingPathComponent(extensionURL.lastPathComponent)
-                
+
                 try FileManager.default.moveItem(at: localURL, to: destinationURL)
-                
+
                 DispatchQueue.main.async {
                     self.installExtension(from: destinationURL)
                 }
@@ -191,22 +186,22 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
             }
         }
         task.resume()
-        
-        let downloadTask = URLSession.shared.downloadTask(with: extensionURL) { (location, response, error) in
+
+        let downloadTask = URLSession.shared.downloadTask(with: extensionURL) { (location, _, error) in
             guard error == nil else {
                 print("Error downloading extension: \(error!)")
                 return
             }
-            
+
             guard let location = location else {
                 print("Error: No location found for downloaded extension")
                 return
             }
-            
+
             let fileManager = FileManager.default
             let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
             let destFilePath = documentsURL.appendingPathComponent(location.lastPathComponent)
-            
+
             do {
                 try fileManager.moveItem(at: location, to: destFilePath)
                 print("Downloaded extension to: \(destFilePath)")

@@ -5,12 +5,12 @@ class ExtensionOutputController: UIViewController, WKNavigationDelegate {
 
     var webView: WKWebView!
     var fileURL: URL?
-    
+
     convenience init(extensionFileURL: URL) {
         self.init()
         fileURL = extensionFileURL
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +26,7 @@ class ExtensionOutputController: UIViewController, WKNavigationDelegate {
         if let fileURL = fileURL {
             webView.loadFileURL(fileURL, allowingReadAccessTo: fileURL.deletingLastPathComponent())
         }
-        
+
         // Call getTopSites to get the top sites
         let urls = getTopSites()
         let htmlString = """
@@ -66,7 +66,7 @@ class ExtensionOutputController: UIViewController, WKNavigationDelegate {
             self.webView.loadHTMLString(htmlString, baseURL: nil)
         }
     }
-    
+
     func getTopSites() -> [String] {
         return [
             "https://www.google.com",
