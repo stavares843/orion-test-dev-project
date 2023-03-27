@@ -207,11 +207,6 @@ class BrowserViewController: UIViewController, WKNavigationDelegate, UITextField
         downloadTask.resume()
     }
 
-    @objc private func showExtensionOutput() {
-        // TODO: Implement the code to show the extension output in a new tab
-        print("Showing extension output")
-    }
-
     @objc private func newTab() {
         // Create a new tab
         let newTab = BrowserViewController()
