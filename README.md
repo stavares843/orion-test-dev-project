@@ -20,11 +20,12 @@ https://user-images.githubusercontent.com/29093946/228093990-c50815b2-0d1b-49ed-
 
 
 
+# 
 The app does the following:
 
-- Opens a web view in a specified URL, using a firefox desktop user agent, where the browser pretends is loading the website in a firefox desktop
-- Does a javascript injection in order to change the text in the button in the above URL
-- When clicking on the above button, it downloads the TopSites extension and ''installs'' (mock implementation) in the firefox extension folder
+- Opens a web view in a specified URL, using a Firefox desktop user agent, where the browser pretends is loading the website in a Firefox desktop
+- Does a JavaScript injection in order to change the text in the button in the above URL
+- When clicking on the above button, it downloads the TopSites extension and ''installs'' (mock implementation) in the Firefox extension folder
 - When clicking on the button, it displays a list of 10 URL's - this is a mock implementation, not the real API from TopSites API
 
 
