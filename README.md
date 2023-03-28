@@ -4,7 +4,7 @@
 
 This project is built using Swift, with zero Storyboard, using UI elements programmatically using UIKit classes.
 
-Docs generated with Jazzy available [here](https://github.com/stavares843/orion-test-dev-project/blob/main/docs/index.html)
+Docs generated with Jazzy available [here](https://github.com/stavares843/orion-test-dev-project/blob/main/docs/index.html) You can run `open docs/index.html` in the terminal to display the docs in the browser.
 
 Linter added as a script in build phases.
 Tests running using Github Actions.
