@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		219A56119FA345EA6B532FE2 /* Pods_Orion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D834603308777D1C5DC464 /* Pods_Orion.framework */; };
 		564D47E929D0FEBC00AEC1FA /* TopSitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564D47E829D0FEBC00AEC1FA /* TopSitesViewController.swift */; };
 		56853C7B29D05F5B00FF7425 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 56853C7A29D05F5B00FF7425 /* manifest.json */; };
 		56D0E39829CF88C600E32EC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E39729CF88C600E32EC2 /* AppDelegate.swift */; };
@@ -19,8 +18,6 @@
 		56D0E3B929CF88C700E32EC2 /* OrionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3B829CF88C700E32EC2 /* OrionUITests.swift */; };
 		56D0E3BB29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3BA29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift */; };
 		56D0E3CA29CF890D00E32EC2 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */; };
-		57E916A41788BD1674989F7F /* Pods_Orion_OrionUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3655D2D13DC039A4E74119 /* Pods_Orion_OrionUITests.framework */; };
-		6AD042DC85D550CC12C8186E /* Pods_OrionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A44752781EB336A9FC84490 /* Pods_OrionTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,10 +38,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B3655D2D13DC039A4E74119 /* Pods_Orion_OrionUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Orion_OrionUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2630E1858C61ACF87FE4117E /* Pods-Orion-OrionUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion-OrionUITests.release.xcconfig"; path = "Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests.release.xcconfig"; sourceTree = "<group>"; };
-		3EE66DDC48B6A150E565925D /* Pods-Orion-OrionUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion-OrionUITests.debug.xcconfig"; path = "Target Support Files/Pods-Orion-OrionUITests/Pods-Orion-OrionUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		4A44752781EB336A9FC84490 /* Pods_OrionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OrionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		564D47E829D0FEBC00AEC1FA /* TopSitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSitesViewController.swift; sourceTree = "<group>"; };
 		56853C7A29D05F5B00FF7425 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
 		56D0E39429CF88C600E32EC2 /* Orion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orion.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,11 +53,6 @@
 		56D0E3B829CF88C700E32EC2 /* OrionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrionUITests.swift; sourceTree = "<group>"; };
 		56D0E3BA29CF88C700E32EC2 /* OrionUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrionUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		56D0E3C929CF890D00E32EC2 /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
-		6C804680AC45127C0EB07324 /* Pods-OrionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrionTests.release.xcconfig"; path = "Target Support Files/Pods-OrionTests/Pods-OrionTests.release.xcconfig"; sourceTree = "<group>"; };
-		8FBB4FEA0837442E1D5CAC91 /* Pods-Orion.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion.release.xcconfig"; path = "Target Support Files/Pods-Orion/Pods-Orion.release.xcconfig"; sourceTree = "<group>"; };
-		96D834603308777D1C5DC464 /* Pods_Orion.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Orion.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1A3979D39BF5F9C0AA5851C /* Pods-Orion.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Orion.debug.xcconfig"; path = "Target Support Files/Pods-Orion/Pods-Orion.debug.xcconfig"; sourceTree = "<group>"; };
-		D29A6126464A4D1E6F8A93AB /* Pods-OrionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OrionTests.debug.xcconfig"; path = "Target Support Files/Pods-OrionTests/Pods-OrionTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				219A56119FA345EA6B532FE2 /* Pods_Orion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AD042DC85D550CC12C8186E /* Pods_OrionTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +74,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57E916A41788BD1674989F7F /* Pods_Orion_OrionUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +88,6 @@
 				56D0E3B729CF88C700E32EC2 /* OrionUITests */,
 				56D0E39529CF88C600E32EC2 /* Products */,
 				CB2023BAAF68B9C50A917F68 /* Pods */,
-				AA89DB52C63CBF1ECA8AC94C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,25 +134,9 @@
 			path = OrionUITests;
 			sourceTree = "<group>";
 		};
-		AA89DB52C63CBF1ECA8AC94C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				96D834603308777D1C5DC464 /* Pods_Orion.framework */,
-				0B3655D2D13DC039A4E74119 /* Pods_Orion_OrionUITests.framework */,
-				4A44752781EB336A9FC84490 /* Pods_OrionTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		CB2023BAAF68B9C50A917F68 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B1A3979D39BF5F9C0AA5851C /* Pods-Orion.debug.xcconfig */,
-				8FBB4FEA0837442E1D5CAC91 /* Pods-Orion.release.xcconfig */,
-				3EE66DDC48B6A150E565925D /* Pods-Orion-OrionUITests.debug.xcconfig */,
-				2630E1858C61ACF87FE4117E /* Pods-Orion-OrionUITests.release.xcconfig */,
-				D29A6126464A4D1E6F8A93AB /* Pods-OrionTests.debug.xcconfig */,
-				6C804680AC45127C0EB07324 /* Pods-OrionTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -180,7 +148,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D0E3BE29CF88C700E32EC2 /* Build configuration list for PBXNativeTarget "Orion" */;
 			buildPhases = (
-				D00414BA9AD88A3BCB3A0788 /* [CP] Check Pods Manifest.lock */,
 				56D0E39029CF88C600E32EC2 /* Sources */,
 				56D0E39129CF88C600E32EC2 /* Frameworks */,
 				56D0E39229CF88C600E32EC2 /* Resources */,
@@ -199,7 +166,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D0E3C129CF88C700E32EC2 /* Build configuration list for PBXNativeTarget "OrionTests" */;
 			buildPhases = (
-				337A99B3BC82F99CD0A9870F /* [CP] Check Pods Manifest.lock */,
 				56D0E3A629CF88C600E32EC2 /* Sources */,
 				56D0E3A729CF88C600E32EC2 /* Frameworks */,
 				56D0E3A829CF88C600E32EC2 /* Resources */,
@@ -218,7 +184,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56D0E3C429CF88C700E32EC2 /* Build configuration list for PBXNativeTarget "OrionUITests" */;
 			buildPhases = (
-				3EC867131FD6167745D4FF73 /* [CP] Check Pods Manifest.lock */,
 				56D0E3B029CF88C700E32EC2 /* Sources */,
 				56D0E3B129CF88C700E32EC2 /* Frameworks */,
 				56D0E3B229CF88C700E32EC2 /* Resources */,
@@ -305,50 +270,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		337A99B3BC82F99CD0A9870F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-OrionTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3EC867131FD6167745D4FF73 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Orion-OrionUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		564D47EF29D2575100AEC1FA /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -366,28 +287,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		D00414BA9AD88A3BCB3A0788 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Orion-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -573,7 +472,6 @@
 		};
 		56D0E3BF29CF88C700E32EC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B1A3979D39BF5F9C0AA5851C /* Pods-Orion.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -606,7 +504,6 @@
 		};
 		56D0E3C029CF88C700E32EC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FBB4FEA0837442E1D5CAC91 /* Pods-Orion.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -639,7 +536,6 @@
 		};
 		56D0E3C229CF88C700E32EC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D29A6126464A4D1E6F8A93AB /* Pods-OrionTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -660,7 +556,6 @@
 		};
 		56D0E3C329CF88C700E32EC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C804680AC45127C0EB07324 /* Pods-OrionTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -681,7 +576,6 @@
 		};
 		56D0E3C529CF88C700E32EC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EE66DDC48B6A150E565925D /* Pods-Orion-OrionUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -700,7 +594,6 @@
 		};
 		56D0E3C629CF88C700E32EC2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2630E1858C61ACF87FE4117E /* Pods-Orion-OrionUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
