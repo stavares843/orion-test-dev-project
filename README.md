@@ -13,6 +13,23 @@ Tests running using Github Actions.
     <a href="https://github.com/stavares843/orion-test-dev-project/actions"><img src="https://github.com/stavares843/orion-test-dev-project/actions/workflows/tests.yml/badge.svg" /></a>
 </p>
 
+
+
+https://user-images.githubusercontent.com/29093946/228093990-c50815b2-0d1b-49ed-8999-bbb2c709789c.mov
+
+
+
+The app does the following
+- opens a webview in a specified URL, using a firefox desktop user agent, where the browser pretends is loading the website in a firefox desktop
+- does a javascript injection in order to change the text in the button in the above url
+- when clicking on the above button, it downloads the TopSites extension and ''installs'' (mock implementation) in the firefox extension folder
+- when clicking in the button, displays a list of 10 urls - this is a mock implementation, not the real API from TopSites API
+
+
+<img width="486" alt="Captura de ecrã 2023-03-28, às 01 10 37" src="https://user-images.githubusercontent.com/29093946/228094133-255bf398-79f3-4217-8e96-ac86c8bb4c6a.png">
+
+
+
 <details>
 <summary>BrowserViewController class</summary>
 
