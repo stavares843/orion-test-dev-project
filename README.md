@@ -7,6 +7,7 @@ This project is built using Swift, with zero Storyboard, using UI elements progr
 Docs generated with Jazzy. You can run `open docs/index.html` in the terminal to display the docs in the browser.
 
 Swiftlint added in build phases.
+
 Tests running using Github Actions.
 
 <p align="left">
