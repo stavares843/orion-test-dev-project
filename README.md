@@ -8,16 +8,8 @@ Docs generated with Jazzy. You can run `open docs/index.html` in the terminal to
 
 Swiftlint added in build phases.
 
-Tests running using Github Actions.
-
-<p align="left">
-    <a href="https://github.com/stavares843/orion-test-dev-project/actions"><img src="https://github.com/stavares843/orion-test-dev-project/actions/workflows/tests.yml/badge.svg" /></a>
-</p>
-
-
 
 https://user-images.githubusercontent.com/29093946/228093990-c50815b2-0d1b-49ed-8999-bbb2c709789c.mov
-
 
 
 # 
